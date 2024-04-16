@@ -121,7 +121,7 @@ class BookInstance(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.id} ({self.book.title})'
+        return f'{self.id} {self.imprint} ({self.book.title})'
 
     class Meta:
         ordering = ['due_back']
