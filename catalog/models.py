@@ -21,6 +21,15 @@ class Genre(models.Model):
         """Returns the url to access a particular genre instance."""
         return reverse('genre-detail', args=[str(self.id)])
 
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('name'),
+                name='genre_name_case_insensitive_unique',
+                violation_error_message = "Genre already exists (case insensitive match)"
+            ),
+        ]
+
 class Language(models.Model):
     """Model representing a Language (e.g. English, French, Japanese, etc.)"""
     pass
