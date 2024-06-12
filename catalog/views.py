@@ -12,6 +12,7 @@ def index(request):
 
     # Available books (status = 'a')
     num_instances_available = BookInstance.objects.filter(status__exact='a').count()
+    num_genre = Genre.objects.all().count()
 
     # The 'all()' is implied by default.
     num_authors = Author.objects.count()
@@ -21,6 +22,7 @@ def index(request):
         'num_instances': num_instances,
         'num_instances_available': num_instances_available,
         'num_authors': num_authors,
+        'num_genre': num_genre,
     }
 
     # Render the HTML template index.html with the data in the context variable
