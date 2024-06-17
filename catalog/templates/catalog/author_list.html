@@ -7,13 +7,13 @@
 {% block navbar %}
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'books' %}">All Books</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'authors' %}">Authors List</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'authors' %}">Authors List</a>
         </li>
     </ul>
     <ul class="navbar-nav ms-auto">
