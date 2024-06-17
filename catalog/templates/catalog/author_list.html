@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block title %}
-    <title>Local Library | All Books</title>
+    <title>Local Library | Authors List</title>
 {% endblock %}
 
 {% block navbar %}
@@ -27,17 +27,17 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Book List</h2>
-    {% if book_list %}
+    {% if author_list %}
     <ul>
-        {% for book in book_list %}
+    {% for author in author_list %}
         <li>
-            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
-            ({{book.author}})
+        <a href="{{ author.get_absolute_url }}">
+        {{ author }} ({{author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif %})
+        </a>
         </li>
-        {% endfor %}
+    {% endfor %}
     </ul>
     {% else %}
-    <p>There are no books in the library.</p>
+    <p>There are no authors available.</p>
     {% endif %}
 {% endblock %}

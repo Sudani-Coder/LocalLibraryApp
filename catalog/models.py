@@ -96,7 +96,7 @@ class Book(models.Model):
         return reverse('book-detail', args=[str(self.id)])
 
     class Meta:
-        ordering = ['title', 'author']
+        ordering = ['title',]
 
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
