@@ -96,7 +96,7 @@ class Book(models.Model):
         return reverse('book-detail', args=[str(self.id)])
 
     class Meta:
-        ordering = ['title',]
+        ordering = ['title', 'author']
 
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
@@ -109,6 +109,7 @@ class BookInstance(models.Model):
     book = models.ForeignKey(Book, on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
+    borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
         ('m', 'Maintenance'),
@@ -124,6 +125,11 @@ class BookInstance(models.Model):
         default='m',
         help_text='Book availability',
     )
+
+    @property
+    def is_overdue(self):
+        """Determines if the book is overdue based on due date and current date."""
+        return bool(self.due_back and date.today() > self.due_back)
 
     def __str__(self):
         """String for representing the Model object."""
