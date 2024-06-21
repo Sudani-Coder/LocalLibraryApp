@@ -39,6 +39,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'authors' %}">Authors List</a>
                         </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'my-borrowed' %}">My Borrowed</a>
+                        </li>
+                        {% endif %}
                     </ul>
                     {% endblock %}
                 </div>
