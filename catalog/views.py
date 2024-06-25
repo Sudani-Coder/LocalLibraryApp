@@ -1,14 +1,13 @@
 import datetime
-
 from django.shortcuts import render, get_object_or_404
-from django.views import generic
 from django.http import HttpResponseRedirect
-from django.urls import reverse
-
+from django.urls import reverse, reverse_lazy
+from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
-
 from .models import Book, Author, BookInstance, Genre, Language
+from .forms import RenewBookForm
 
 def index(request):
     """View function for home page of site."""
