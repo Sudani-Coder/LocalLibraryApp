@@ -37,12 +37,53 @@
                             <a class="nav-link" href="{% url 'books' %}">All Books</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'bookinstances' %}">Book Copies</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'authors' %}">Authors List</a>
                         </li>
-                        {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'my-borrowed' %}">My Borrowed</a>
+                            <a class="nav-link" href="{% url 'genres' %}">All genres</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'languages' %}">All languages</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'my-borrowed' %}">My borrowed</a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_staff %}
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'all-borrowed' %}">All borrowed</a>
+                        </li>
+                        {% if perms.catalog.add_genre %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'genre-create' %}">Create genre</a>
+                        </li>
+                        {% endif %}
+                        {% if perms.catalog.add_language %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'language-create' %}">Create language</a>
+                        </li>
+                        {% endif %}
+                        {% if perms.catalog.add_author %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'author-create' %}">Create author</a>
+                        </li>
+                        {% endif %}
+                        {% if perms.catalog.add_book %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'book-create' %}">Create book</a>
+                        </li>
+                        {% endif %}
+                        {% if perms.catalog.add_bookinstance %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'bookinstance-create' %}">Create copy of book</a>
+                        </li>
+                        {% endif %}
                         {% endif %}
                     </ul>
                     {% endblock %}

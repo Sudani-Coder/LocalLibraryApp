@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block title %}
-    <title>Local Library | Borrowed Books</title>
+    <title>Local Library | {{ book_instance.book.title }}</title>
 {% endblock %}
 
 {% block navbar %}
@@ -45,21 +45,15 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Borrowed books</h2>
+    <h2>Renew: {{ book_instance.book.title }}</h2>
+    <p>Borrower: {{ book_instance.borrower }}</p>
+    <p {% if book_instance.is_overdue %} class="text-danger"{% endif %} >Due date: {{ book_instance.due_back }}</p>
 
-    {% if bookinstance_list %}
-    <ul>
-
-      {% for bookinst in bookinstance_list %}
-      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> ({{ bookinst.due_back }})
-      </li>
-      {% endfor %}
-    </ul>
-
-    {% else %}
-    <div class="alert alert-warning" role="alert">
-        <p class="m-0 p-0">There are no books borrowed.</p>
-    </div>
-    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}
